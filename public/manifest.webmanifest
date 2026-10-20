@@ -1,0 +1,10 @@
+{
+  "name": "Sakhi",
+  "short_name": "Sakhi",
+  "description": "Anonymous safety reviews, a live safety map and one-tap SOS.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F5F3F8",
+  "theme_color": "#3B1F5C",
+  "icons": [{ "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
+}
