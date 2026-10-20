@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { api, qs } from '../lib/api.js';
+import { API_BASE, api, qs } from '../lib/api.js';
 import { clientId, deviceId } from '../lib/device.js';
 
 const moved = (a, b) => {
@@ -33,7 +33,7 @@ export function useStream(loc, onEvent) {
       }
     };
     const connect = () => {
-      es = new EventSource(`/api/stream?${qs({ client: clientId, device: deviceId() })}`);
+      es = new EventSource(`${API_BASE}/stream?${qs({ client: clientId, device: deviceId() })}`);
       for (const t of ['sos', 'sos-update', 'sos-resolved', 'post']) es.addEventListener(t, on(t));
       es.addEventListener('ping', alive);
       es.onopen = () => {
