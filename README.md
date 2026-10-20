@@ -1,5 +1,7 @@
 # Sakhi (beta 0.2)
 
+Hackathon team repository for NGNIX - [hackindia-team:t-hacks-90:ngnix]
+
 A women's safety app. It has an anonymous, Reddit-style community for place reviews with #hashtags,
 a live safety map built from those reviews, a one-tap SOS that works without internet, a journey
 tracker that raises an SOS on its own when the phone goes quiet, and help finders for the nearest
