@@ -150,3 +150,5 @@ vite.config.ts.timestamp-*
 
 # Sakhi local database
 data/
+
+# Local editor and tool settings
