@@ -2,7 +2,7 @@ import { DatabaseSync } from 'node:sqlite';
 import { mkdirSync } from 'node:fs';
 import path from 'node:path';
 
-const dataDir = process.env.SAKHI_DATA_DIR || path.resolve(import.meta.dirname, '../data');
+const dataDir = process.env.SAKHI_DATA_DIR || (process.env.VERCEL ? '/tmp/sakhi' : null) || path.resolve(import.meta.dirname, '../data');
 mkdirSync(dataDir, { recursive: true });
 
 export const db = new DatabaseSync(path.join(dataDir, 'sakhi.db'));

@@ -34,6 +34,15 @@ app.use('/api', (req, res, next) => {
 });
 app.get('/api/health', (req, res) => res.json({ ok: true }));
 
+let lastJourneyCheck = 0;
+app.use('/api', (req, res, next) => {
+  if (Date.now() - lastJourneyCheck > 5000) {
+    lastJourneyCheck = Date.now();
+    try { checkJourneys(); } catch (err) { console.error(err); }
+  }
+  next();
+});
+
 function hashDevice(id) {
   id = String(id || '');
   if (!/^[A-Za-z0-9-]{16,64}$/.test(id)) return null;
@@ -387,7 +396,7 @@ app.get('/api/sos/:id', (req, res) => {
 
 const JOURNEY_TIMEOUT = Number(process.env.SAKHI_JOURNEY_TIMEOUT_MS) || 10 * 60e3;
 const JOURNEY_MAX_AGE = 24 * 60 * 60e3;
-const PUBLIC_URL = (process.env.PUBLIC_URL || '').replace(/\/+$/, '');
+const PUBLIC_URL = (process.env.PUBLIC_URL || (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : '')).replace(/\/+$/, '');
 
 function publicJourney(j) {
   return {
@@ -577,4 +586,6 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'Something went wrong' });
 });
 
-app.listen(PORT, () => console.log(`Sakhi API on http://localhost:${PORT}`));
+if (!process.env.VERCEL) app.listen(PORT, () => console.log(`Sakhi API on http://localhost:${PORT}`));
+
+export default app;
