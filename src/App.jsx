@@ -157,7 +157,7 @@ export default function App() {
     setTabState('map');
     setMapMode(mode);
   };
-  const fixLocation = () => (loc && status !== 'denied' && status !== 'unavailable' ? retryGps() : pickOnMap('locate'));
+  const fixLocation = () => (loc && status !== 'denied' ? retryGps() : pickOnMap('locate'));
   const onPosted = (post) => {
     setCompose(null);
     setTabState('community');

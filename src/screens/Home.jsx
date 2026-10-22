@@ -12,7 +12,9 @@ export function LocationChip({ status, loc, onFix }) {
   const label =
     status === 'gps' ? `GPS · within ${loc?.accuracy ?? '?'} m`
       : status === 'locating' ? 'Finding you…'
-        : loc ? 'Pinned location' : 'Set your location';
+        : status === 'manual' ? 'Pinned location'
+          : status === 'denied' ? 'Location blocked · pin it'
+            : loc ? 'Last known spot · retry' : 'Set your location';
   const live = status === 'gps';
   return (
     <button className="loc-chip" onClick={onFix} aria-label={`Location: ${label}`}>
